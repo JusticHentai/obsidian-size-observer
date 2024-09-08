@@ -1,11 +1,11 @@
 {
-	"id": "file-size-view",
-	"name": "File Size View",
-	"version": "1.0.0",
-	"minAppVersion": "0.15.0",
-	"description": "Show the size of files then you can make superior easy",
-	"author": "JusticHentai",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
-	"isDesktopOnly": false
+  "id": "size-observer",
+  "name": "Size Observer",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Show the size of files then you can make superior easy",
+  "author": "JusticHentai",
+  "authorUrl": "https://obsidian.md",
+  "fundingUrl": "https://obsidian.md/pricing",
+  "isDesktopOnly": false
 }
