@@ -1,5 +1,4 @@
 import { App, Plugin, PluginSettingTab, Setting, WorkspaceLeaf } from 'obsidian'
-import Date from 'src/Date'
 import View, { VIEW_TYPE } from 'src/View'
 
 interface MyPluginSettings {
@@ -12,13 +11,20 @@ const DEFAULT_SETTINGS: MyPluginSettings = {
 
 export default class SizeObserver extends Plugin {
   settings: MyPluginSettings
+  view: View
 
   async onload() {
     await this.loadSettings()
 
     this.addSettingTab(new SizeObserverSettingTab(this.app, this))
 
-    this.registerView(VIEW_TYPE, (leaf: WorkspaceLeaf) => new View(leaf))
+    this.registerView(VIEW_TYPE, (leaf: WorkspaceLeaf) => {
+      const view = new View(leaf)
+
+      this.view = view
+
+      return view
+    })
 
     this.addCommand({
       id: 'open-size-observer',
@@ -27,13 +33,6 @@ export default class SizeObserver extends Plugin {
         this?.app?.workspace?.getRightLeaf(false)?.setViewState({
           type: VIEW_TYPE,
         })
-
-        const date = new Date(this.app.vault?.fileMap)
-        date.startTravel()
-        const dateMap = date.dateMap
-
-        console.log('test', this.app.vault.fileMap)
-        console.log(dateMap)
       },
     })
   }
@@ -52,7 +51,7 @@ export default class SizeObserver extends Plugin {
 class SizeObserverSettingTab extends PluginSettingTab {
   plugin: SizeObserver
 
-  constructor(app: App, plugin: MyPlugin) {
+  constructor(app: App, plugin: SizeObserver) {
     super(app, plugin)
     this.plugin = plugin
   }

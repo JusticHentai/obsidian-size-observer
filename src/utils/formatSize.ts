@@ -1,10 +1,10 @@
 const unitMap = ['B', 'KB', 'MB', 'GB']
 
 const formatSize = (size: number): string => {
-  let count = 0
+  let count = -1
   let res = size
 
-  while (Math.floor(res / 1024)) {
+  while (res) {
     res = Math.floor(res / 1024)
     count++
   }

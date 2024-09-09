@@ -1,8 +1,8 @@
-import formatSize from './formatSize'
-import { DateItem, File } from './types'
+import { DataItem, File } from './types'
+import formatSize from './utils/formatSize'
 
-export default class Date {
-  dateMap: DateItem
+export default class Data {
+  dataMap: DataItem
   fileMap: any
 
   constructor(fileMap: any) {
@@ -12,10 +12,10 @@ export default class Date {
   startTravel = () => {
     const root = this.fileMap['/']
 
-    this.dateMap = this.travel(root)
+    this.dataMap = this.travel(root)
   }
 
-  travel = (next: File): DateItem => {
+  travel = (next: File): DataItem => {
     const path: string = next.path
     const size: number = next?.stat?.size || 0
 
@@ -26,20 +26,26 @@ export default class Date {
     // ----------------------------------------------------------------
 
     let childrenSize = 0
-    const childrenDateItemList = []
+    const childrenDataItemList = []
 
     for (const child of next.children) {
-      const childrenDateItem = this.travel(child)
+      const childrenDataItem = this.travel(child)
 
-      childrenSize += childrenDateItem.size
-      childrenDateItemList.push(childrenDateItem)
+      childrenSize += childrenDataItem.size
+      childrenDataItemList.push(childrenDataItem)
+    }
+
+    for (const child of childrenDataItemList) {
+      const { size } = child
+
+      child.percent = Math.floor((size / childrenSize) * 100)
     }
 
     return {
       path,
       size: childrenSize,
       displaySize: formatSize(childrenSize),
-      children: childrenDateItemList,
+      children: childrenDataItemList,
     }
   }
 }

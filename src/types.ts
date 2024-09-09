@@ -6,9 +6,17 @@ export interface File {
   }
 }
 
-export type DateItem = {
+export type DataItem = {
   path: string
   size: number
   displaySize: string
-  children?: DateItem[]
+  children?: DataItem[]
+  percent?: number
+}
+
+export interface Component {
+  type: string
+  class: string
+  text?: string
+  children?: Component[]
 }
