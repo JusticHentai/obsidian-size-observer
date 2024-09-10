@@ -1,34 +1,44 @@
 import { ItemView, WorkspaceLeaf } from 'obsidian'
 import base from './components/base'
-import Data from './Data'
 import { DataItem } from './types'
+import getData from './utils/getData'
 import render from './utils/render'
 
 export const VIEW_TYPE = 'sizeObserver'
 
 export default class View extends ItemView {
-  data: Data
+  data: DataItem
   current: DataItem
 
   constructor(leaf: WorkspaceLeaf) {
     super(leaf)
 
-    this.data = new Data((leaf as any)?.app?.vault?.fileMap)
-    this.data.startTravel()
+    this.current = this.data = getData((leaf as any)?.app?.vault?.fileMap)
 
-    this.initBaseView()
+    this.contentEl.addEventListener('click', (e) => {
+      console.log(e.target)
+    })
+
+    this.updateView()
   }
 
-  initBaseView() {
-    const dataMap = this.data.dataMap
-    render(this.containerEl, base(dataMap))
+  clickCb = (e: MouseEvent) => {}
+
+  updateView = () => {
+    this.contentEl.innerHTML = ''
+
+    render(this.contentEl, base(this.current))
   }
 
-  getViewType(): string {
+  getViewType = (): string => {
     return VIEW_TYPE
   }
 
-  getDisplayText(): string {
+  getDisplayText = (): string => {
     return 'Size Observer'
+  }
+
+  getIcon = (): string => {
+    return 'ruler'
   }
 }

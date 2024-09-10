@@ -1,6 +1,9 @@
 import { Component, DataItem } from '../types'
 
 const item = (data: DataItem): Component => {
+  const { path } = data
+  const displayPath = path.match(/[^/\\]+$/)?.[0] || ''
+
   return {
     type: 'div',
     class: 'item',
@@ -8,7 +11,7 @@ const item = (data: DataItem): Component => {
       {
         type: 'div',
         class: 'path',
-        text: data.path,
+        text: displayPath,
       },
       {
         type: 'div',

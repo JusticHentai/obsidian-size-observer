@@ -5,7 +5,14 @@ const base = (data: DataItem): Component => {
   return {
     type: 'div',
     class: 'base',
-    children: [ItemList(data.children)],
+    children: [
+      {
+        type: 'div',
+        class: 'head',
+        text: data.path,
+      },
+      ItemList(data.children),
+    ],
   }
 }
 
