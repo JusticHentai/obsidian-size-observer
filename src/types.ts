@@ -19,4 +19,6 @@ export interface Component {
   class: string
   text?: string
   children?: Component[]
+  path?: string
+  width?: number
 }

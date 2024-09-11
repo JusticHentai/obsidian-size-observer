@@ -5,3 +5,33 @@
   overflow-y: auto;
 }
 
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 'bold';
+  font-size: var(--h1-size);
+  color: var(--interactive-accent);
+  cursor: pointer;
+}
+
+.itemList {
+  margin-top: 1em;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.path {
+  padding: 0.2em 0.5em;
+  border-radius: 0.3em;
+  margin-right: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background-color: var(--interactive-accent);
+  cursor: pointer;
+}

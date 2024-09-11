@@ -9,36 +9,82 @@ export const VIEW_TYPE = 'sizeObserver'
 export default class View extends ItemView {
   data: DataItem
   current: DataItem
+  prev: DataItem[] = []
 
   constructor(leaf: WorkspaceLeaf) {
     super(leaf)
 
     this.current = this.data = getData((leaf as any)?.app?.vault?.fileMap)
 
-    this.contentEl.addEventListener('click', (e) => {
-      console.log(e.target)
-    })
+    this.contentEl.addEventListener('click', this.clickCb.bind(this))
 
     this.updateView()
   }
 
-  clickCb = (e: MouseEvent) => {}
+  clickCb(e: MouseEvent) {
+    const className = e?.target?.getAttribute('class') || ''
 
-  updateView = () => {
-    this.contentEl.innerHTML = ''
+    if (className === 'head') {
+      const prev = this.prev.pop()
 
-    render(this.contentEl, base(this.current))
+      if (!prev) {
+        return
+      }
+
+      this.current = prev
+      this.updateView()
+
+      return
+    }
+
+    const path = e?.target?.getAttribute('path') || ''
+
+    if (path) {
+      this.updateCurrent(path)
+
+      return
+    }
+
+    const pathElement = e?.target?.getElementsByClassName('path')
+
+    const newPath = [...pathElement]?.[0]?.getAttribute('path') || ''
+    this.updateCurrent(newPath)
   }
 
-  getViewType = (): string => {
+  updateCurrent(path: string) {
+    for (const child of this.current.children!) {
+      if (child.path !== path) {
+        continue
+      }
+
+      if (child?.children?.length) {
+        this.prev.push(this.current)
+        this.current = child
+      }
+
+      break
+    }
+
+    this.updateView()
+  }
+
+  updateView() {
+    this.contentEl.innerHTML = ''
+
+    const newElement = render(base(this.current))
+
+    this.contentEl.appendChild(newElement)
+  }
+
+  getViewType(): string {
     return VIEW_TYPE
   }
 
-  getDisplayText = (): string => {
+  getDisplayText(): string {
     return 'Size Observer'
   }
 
-  getIcon = (): string => {
+  getIcon(): string {
     return 'ruler'
   }
 }
