@@ -21,7 +21,7 @@ export default class View extends ItemView {
     this.updateView()
   }
 
-  clickCb(e: MouseEvent) {
+  clickCb(e: any) {
     const className = e?.target?.getAttribute('class') || ''
 
     if (className === 'head') {
