@@ -1,10 +1,11 @@
 import { ItemView, WorkspaceLeaf } from 'obsidian'
 import base from './components/base'
+import ICON from './constants/icon'
+import VIEW_DISPLAY from './constants/viewDisplay'
+import VIEW_TYPE from './constants/viewType'
 import { DataItem } from './types'
 import getData from './utils/getData'
 import render from './utils/render'
-
-export const VIEW_TYPE = 'sizeObserver'
 
 export default class View extends ItemView {
   data: DataItem
@@ -81,10 +82,10 @@ export default class View extends ItemView {
   }
 
   getDisplayText(): string {
-    return 'Size Observer'
+    return VIEW_DISPLAY
   }
 
   getIcon(): string {
-    return 'ruler'
+    return ICON
   }
 }
