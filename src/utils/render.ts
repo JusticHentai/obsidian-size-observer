@@ -1,4 +1,4 @@
-import { Component } from '../types'
+import Component from '../types/Component'
 
 const render = (component: Component): HTMLElement => {
   const { type, class: cls, text, children, path, width } = component

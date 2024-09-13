@@ -1,4 +1,5 @@
-import { DataItem, File } from '../types'
+import DataItem from '../types/DataItem'
+import File from '../types/File'
 import formatSize from './formatSize'
 
 const getData = (fileMap: any): DataItem => {

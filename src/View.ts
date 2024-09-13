@@ -1,9 +1,12 @@
 import { ItemView, WorkspaceLeaf } from 'obsidian'
 import base from './components/base'
+import CONTENT_ELEMENT from './constants/contentEl'
+import HEAD from './constants/head'
 import ICON from './constants/icon'
 import VIEW_DISPLAY from './constants/viewDisplay'
 import VIEW_TYPE from './constants/viewType'
-import { DataItem } from './types'
+import DataItem from './types/DataItem'
+import findParent from './utils/findParent'
 import getData from './utils/getData'
 import render from './utils/render'
 
@@ -23,33 +26,25 @@ export default class View extends ItemView {
   }
 
   clickCb(e: any) {
-    const className = e?.target?.getAttribute('class') || ''
+    const element = e?.target || document.createElement('div')
 
-    if (className === 'head') {
-      const prev = this.prev.pop()
+    const path = findParent(element, ['path', 'class'])
 
-      if (!prev) {
-        return
-      }
+    if (!path || path === CONTENT_ELEMENT) {
+      return
+    }
 
-      this.current = prev
+    if (path === HEAD && this.prev.length) {
+      const prevElement = this.prev.pop()!
+
+      this.current = prevElement
+
       this.updateView()
 
       return
     }
 
-    const path = e?.target?.getAttribute('path') || ''
-
-    if (path) {
-      this.updateCurrent(path)
-
-      return
-    }
-
-    const pathElement = e?.target?.getElementsByClassName('path')
-
-    const newPath = [...pathElement]?.[0]?.getAttribute('path') || ''
-    this.updateCurrent(newPath)
+    this.updateCurrent(path)
   }
 
   updateCurrent(path: string) {
@@ -58,6 +53,7 @@ export default class View extends ItemView {
         continue
       }
 
+      // 是文件夹才进入下一层
       if (child?.children?.length) {
         this.prev.push(this.current)
         this.current = child
