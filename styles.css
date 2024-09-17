@@ -9,29 +9,50 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 'bold';
-  font-size: var(--h1-size);
-  color: var(--interactive-accent);
-  cursor: pointer;
+  margin-left: 20px;
 }
 
 .itemList {
   margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .item {
+  margin-right: 10px;
+  padding: 5px 10px;
   display: flex;
   align-items: center;
   margin-bottom: 0.5em;
+  background-color: var(--background-modifier-hover);
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .path {
-  padding: 0.2em 0.5em;
-  border-radius: 0.3em;
-  margin-right: 1em;
+  max-width: 200px;
+  margin-right: 8px;
+  width: auto !important;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  background-color: var(--interactive-accent);
+}
+
+.gap {
+  height: 10px;
+  width: 1px;
+  background-color: #fff;
+  margin-right: 8px;
+}
+
+.back {
+  width: 24px;
+  height: 24px;
   cursor: pointer;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }

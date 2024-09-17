@@ -1,7 +1,7 @@
 import { ItemView, WorkspaceLeaf } from 'obsidian'
 import base from './components/base'
+import BACK from './constants/back'
 import CONTENT_ELEMENT from './constants/contentEl'
-import HEAD from './constants/head'
 import ICON from './constants/icon'
 import VIEW_DISPLAY from './constants/viewDisplay'
 import VIEW_TYPE from './constants/viewType'
@@ -28,13 +28,22 @@ export default class View extends ItemView {
   clickCb(e: any) {
     const element = e?.target || document.createElement('div')
 
-    const path = findParent(element, ['path', 'class'])
+    const attributeRes = findParent(element, {
+      path: '',
+      class: [CONTENT_ELEMENT, BACK],
+    })
 
-    if (!path || path === CONTENT_ELEMENT) {
+    if (!attributeRes) {
       return
     }
 
-    if (path === HEAD && this.prev.length) {
+    const [attribute, value] = attributeRes
+
+    if (attribute === 'class' && value.includes(CONTENT_ELEMENT)) {
+      return
+    }
+
+    if (attribute === 'class' && value.includes(BACK) && this.prev.length) {
       const prevElement = this.prev.pop()!
 
       this.current = prevElement
@@ -44,7 +53,11 @@ export default class View extends ItemView {
       return
     }
 
-    this.updateCurrent(path)
+    if (attribute === 'path') {
+      this.updateCurrent(value)
+
+      return
+    }
   }
 
   updateCurrent(path: string) {

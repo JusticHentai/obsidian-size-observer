@@ -21,7 +21,7 @@ const travel = (next: File): DataItem => {
   // ----------------------------------------------------------------
 
   let childrenSize = 0
-  const childrenDataItemList = []
+  let childrenDataItemList = []
 
   for (const child of next.children) {
     const childrenDataItem = travel(child)
@@ -35,6 +35,8 @@ const travel = (next: File): DataItem => {
 
     child.percent = Math.floor((size / childrenSize) * 100)
   }
+
+  childrenDataItemList = childrenDataItemList.sort((a, b) => b.size - a.size)
 
   return {
     path,

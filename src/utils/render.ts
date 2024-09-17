@@ -1,3 +1,4 @@
+import { setIcon } from 'obsidian'
 import Component from '../types/Component'
 
 const render = (component: Component): HTMLElement => {
@@ -11,6 +12,10 @@ const render = (component: Component): HTMLElement => {
 
   if (cls) {
     div.setAttribute('class', cls)
+  }
+
+  if (cls?.includes('back')) {
+    setIcon(div, 'arrow-big-left')
   }
 
   if (path) {

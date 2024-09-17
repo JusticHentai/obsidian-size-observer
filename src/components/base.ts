@@ -1,4 +1,7 @@
-import { Component, DataItem } from '../types'
+import Component from '../types/Component'
+import DataItem from '../types/DataItem'
+import back from './back'
+import head from './head'
 import ItemList from './itemList'
 
 const base = (data: DataItem): Component => {
@@ -6,11 +9,7 @@ const base = (data: DataItem): Component => {
     type: 'div',
     class: 'base',
     children: [
-      {
-        type: 'div',
-        class: 'head',
-        text: data.path,
-      },
+      { type: 'div', class: 'top', children: [back(), head(data.path)] },
       ItemList(data.children),
     ],
   }
