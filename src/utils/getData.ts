@@ -1,21 +1,20 @@
+import { TFile, TFolder } from 'obsidian'
 import DataItem from '../types/DataItem'
-import File from '../types/File'
 import formatSize from './formatSize'
 
-const getData = (fileMap: any): DataItem => {
-  const root = fileMap['/']
-
+const getData = (root: TFolder): DataItem => {
   return travel(root)
 }
 
 export default getData
 
-const travel = (next: File): DataItem => {
+const travel = (next: TFile | TFolder): DataItem => {
   const path: string = next.path
-  const size: number = next?.stat?.size || 0
 
-  if (!next?.children?.length) {
-    return { path, size, displaySize: formatSize(size) }
+  if (next instanceof TFile) {
+    const size = next.stat.size
+
+    return { path, size, displaySize: formatSize(size), raw: next }
   }
 
   // ----------------------------------------------------------------
@@ -24,7 +23,7 @@ const travel = (next: File): DataItem => {
   let childrenDataItemList = []
 
   for (const child of next.children) {
-    const childrenDataItem = travel(child)
+    const childrenDataItem = travel(child as any)
 
     childrenSize += childrenDataItem.size
     childrenDataItemList.push(childrenDataItem)
@@ -43,5 +42,6 @@ const travel = (next: File): DataItem => {
     size: childrenSize,
     displaySize: formatSize(childrenSize),
     children: childrenDataItemList,
+    raw: next,
   }
 }

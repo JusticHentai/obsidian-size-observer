@@ -18,6 +18,10 @@ const render = (component: Component): HTMLElement => {
     setIcon(div, 'arrow-big-left')
   }
 
+  if (cls?.includes('refresh')) {
+    setIcon(div, 'refresh-ccw')
+  }
+
   if (path) {
     div.setAttribute('path', path)
   }

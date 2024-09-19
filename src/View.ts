@@ -3,24 +3,31 @@ import base from './components/base'
 import BACK from './constants/back'
 import CONTENT_ELEMENT from './constants/contentEl'
 import ICON from './constants/icon'
+import REFRESH from './constants/refresh'
 import VIEW_DISPLAY from './constants/viewDisplay'
 import VIEW_TYPE from './constants/viewType'
 import DataItem from './types/DataItem'
 import findParent from './utils/findParent'
 import getData from './utils/getData'
+import reloadPath from './utils/reloadPath'
 import render from './utils/render'
 
 export default class View extends ItemView {
   data: DataItem
   current: DataItem
   prev: DataItem[] = []
+  leaf: WorkspaceLeaf
 
   constructor(leaf: WorkspaceLeaf) {
     super(leaf)
 
-    this.current = this.data = getData((leaf as any)?.app?.vault?.fileMap)
+    this.leaf = leaf
 
     this.contentEl.addEventListener('click', this.clickCb.bind(this))
+
+    const root = this.app.vault.getRoot()
+
+    this.current = this.data = getData(root)
 
     this.updateView()
   }
@@ -30,7 +37,7 @@ export default class View extends ItemView {
 
     const attributeRes = findParent(element, {
       path: '',
-      class: [CONTENT_ELEMENT, BACK],
+      class: [CONTENT_ELEMENT, BACK, REFRESH],
     })
 
     if (!attributeRes) {
@@ -51,6 +58,14 @@ export default class View extends ItemView {
       this.updateView()
 
       return
+    }
+
+    if (attribute === 'class' && value.includes(REFRESH)) {
+      this.data = getData((this.leaf as any)?.app?.vault?.fileMap)
+
+      this.current = reloadPath(this.current, this.prev)
+
+      this.updateView()
     }
 
     if (attribute === 'path') {
