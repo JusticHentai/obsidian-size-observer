@@ -63,9 +63,16 @@ export default class View extends ItemView {
     }
 
     if (attribute === 'class' && value.includes(REFRESH)) {
-      this.data = getData((this.leaf as any)?.app?.vault?.fileMap)
+      this.prev.push(this.current)
 
-      this.current = reloadPath(this.current, this.prev)
+      const root = this.app.vault.getRoot()
+
+      this.data = getData(root)
+
+      const [current, prevList] = reloadPath(this.data, this.prev)
+
+      this.current = current
+      this.prev = prevList
 
       this.updateView()
     }
