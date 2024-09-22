@@ -1,6 +1,5 @@
 import { TFile, TFolder } from 'obsidian'
-import DataItem from '../types/DataItem'
-import formatSize from './formatSize'
+import { DataItem } from '../types'
 
 const getData = (root: TFolder): DataItem => {
   return travel(root)
@@ -14,7 +13,7 @@ const travel = (next: TFile | TFolder): DataItem => {
   if (next instanceof TFile) {
     const size = next.stat.size
 
-    return { path, size, displaySize: formatSize(size), raw: next }
+    return { path, size, raw: next }
   }
 
   // ----------------------------------------------------------------
@@ -32,7 +31,11 @@ const travel = (next: TFile | TFolder): DataItem => {
   for (const child of childrenDataItemList) {
     const { size } = child
 
-    child.percent = Math.floor((size / childrenSize) * 100)
+    if (childrenSize) {
+      child.percent = Math.floor((size / childrenSize) * 100)
+    } else {
+      child.percent = Math.floor(100 / childrenDataItemList.length)
+    }
   }
 
   childrenDataItemList = childrenDataItemList.sort((a, b) => b.size - a.size)
@@ -40,7 +43,6 @@ const travel = (next: TFile | TFolder): DataItem => {
   return {
     path,
     size: childrenSize,
-    displaySize: formatSize(childrenSize),
     children: childrenDataItemList,
     raw: next,
   }

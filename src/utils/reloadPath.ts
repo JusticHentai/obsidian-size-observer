@@ -1,4 +1,4 @@
-import DataItem from '../types/DataItem'
+import { DataItem } from '../types'
 
 const reloadPath = (curr: DataItem, prevList: DataItem[]): DataItem => {
   // prevList.push(curr)

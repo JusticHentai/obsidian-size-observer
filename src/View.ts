@@ -1,12 +1,14 @@
 import { ItemView, WorkspaceLeaf } from 'obsidian'
 import base from './components/base'
-import BACK from './constants/back'
-import CONTENT_ELEMENT from './constants/contentEl'
-import ICON from './constants/icon'
-import REFRESH from './constants/refresh'
-import VIEW_DISPLAY from './constants/viewDisplay'
-import VIEW_TYPE from './constants/viewType'
-import DataItem from './types/DataItem'
+import {
+  BACK,
+  CONTENT_ELEMENT,
+  ICON,
+  REFRESH,
+  VIEW_DISPLAY,
+  VIEW_TYPE,
+} from './constants'
+import { DataItem } from './types'
 import findParent from './utils/findParent'
 import getData from './utils/getData'
 import reloadPath from './utils/reloadPath'

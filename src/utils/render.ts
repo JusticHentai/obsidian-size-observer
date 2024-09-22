@@ -1,5 +1,5 @@
 import { setIcon } from 'obsidian'
-import Component from '../types/Component'
+import { Component } from '../types'
 
 const render = (component: Component): HTMLElement => {
   const { type, class: cls, text, children, path, width } = component
@@ -24,10 +24,6 @@ const render = (component: Component): HTMLElement => {
 
   if (path) {
     div.setAttribute('path', path)
-  }
-
-  if (width !== undefined) {
-    div.style.width = `${(width / 100) * 10 + 9}em`
   }
 
   if (!children?.length) {

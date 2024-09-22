@@ -1,9 +1,6 @@
 import { Plugin, WorkspaceLeaf } from 'obsidian'
 import View from 'src/View'
-import ICON from 'src/constants/icon'
-import OPEN_VIEW_COMMAND from 'src/constants/openViewCommand'
-import RIBBON_DESC from 'src/constants/ribbonDesc'
-import VIEW_TYPE from 'src/constants/viewType'
+import { ICON, OPEN_VIEW_COMMAND, RIBBON_DESC, VIEW_TYPE } from 'src/constants'
 import openView from 'src/utils/openView'
 
 export default class SizeObserver extends Plugin {
