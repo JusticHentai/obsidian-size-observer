@@ -1,5 +1,4 @@
-import Component from '../types/Component'
-import DataItem from '../types/DataItem'
+import { Component, DataItem } from '../types'
 
 const item = (data: DataItem): Component => {
   const { path, percent } = data
@@ -8,13 +7,12 @@ const item = (data: DataItem): Component => {
   return {
     type: 'div',
     class: 'item',
-    path: displayPath,
+    path: path,
     children: [
       {
         type: 'div',
         class: 'tree-item-inner nav-file-title-content path',
         text: displayPath,
-        path: displayPath,
         width: percent,
       },
       {
@@ -25,7 +23,6 @@ const item = (data: DataItem): Component => {
         type: 'div',
         class: 'tree-item-inner nav-file-title-content percent',
         text: `${data.percent}%`,
-        path: displayPath,
       },
     ],
   }

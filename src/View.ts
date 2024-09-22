@@ -1,4 +1,4 @@
-import { ItemView, WorkspaceLeaf } from 'obsidian'
+import { ItemView, TFolder, WorkspaceLeaf } from 'obsidian'
 import base from './components/base'
 import {
   BACK,
@@ -84,7 +84,7 @@ export default class View extends ItemView {
       }
 
       // 是文件夹才进入下一层
-      if (child?.children?.length) {
+      if (child.raw instanceof TFolder) {
         this.prev.push(this.current)
         this.current = child
       }

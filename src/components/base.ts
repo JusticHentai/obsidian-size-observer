@@ -1,5 +1,4 @@
-import Component from '../types/Component'
-import DataItem from '../types/DataItem'
+import { Component, DataItem } from '../types'
 import back from './back'
 import head from './head'
 import ItemList from './itemList'

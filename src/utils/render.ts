@@ -2,7 +2,7 @@ import { setIcon } from 'obsidian'
 import { Component } from '../types'
 
 const render = (component: Component): HTMLElement => {
-  const { type, class: cls, text, children, path, width } = component
+  const { type, class: cls, text, children, path } = component
 
   const div = document.createElement(type)
 

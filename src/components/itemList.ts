@@ -1,5 +1,4 @@
-import Component from '../types/Component'
-import DataItem from '../types/DataItem'
+import { Component, DataItem } from '../types'
 import item from './item'
 
 const itemList = (dataList: DataItem[] = []): Component => {

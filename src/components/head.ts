@@ -1,4 +1,4 @@
-import Component from '../types/Component'
+import { Component } from '../types'
 
 const back = (path: string): Component => {
   return {
