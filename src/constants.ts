@@ -10,3 +10,6 @@ export const OPEN_VIEW_COMMAND = {
   name: 'Open View',
 }
 export const RIBBON_DESC = 'Open file observer view'
+export const DEFAULT_SETTINGS = {
+  showRibbonIcon: true,
+}
