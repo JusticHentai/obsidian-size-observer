@@ -1,7 +1,7 @@
 import { Component, DataItem } from '../types'
 
 const item = (data: DataItem): Component => {
-  const { path, percent } = data
+  const { path } = data
   const displayPath = path.match(/[^/\\]+$/)?.[0] || ''
 
   return {
@@ -13,7 +13,6 @@ const item = (data: DataItem): Component => {
         type: 'div',
         class: 'tree-item-inner nav-file-title-content path',
         text: displayPath,
-        width: percent,
       },
       {
         type: 'div',
