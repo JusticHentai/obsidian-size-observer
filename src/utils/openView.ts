@@ -1,5 +1,5 @@
 import { Workspace, WorkspaceLeaf } from 'obsidian'
-import VIEW_TYPE from '../constants/viewType'
+import { VIEW_TYPE } from '../constants'
 
 const openView = (workspace: Workspace) => {
   const leafs = workspace.getLeavesOfType(VIEW_TYPE)

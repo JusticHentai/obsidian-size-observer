@@ -1,4 +1,4 @@
-import { ItemView, TFolder, WorkspaceLeaf } from 'obsidian'
+import { ItemView, TFile, TFolder, WorkspaceLeaf } from 'obsidian'
 import base from './components/base'
 import {
   BACK,
@@ -87,6 +87,10 @@ export default class View extends ItemView {
       if (child.raw instanceof TFolder) {
         this.prev.push(this.current)
         this.current = child
+      }
+
+      if (child.raw instanceof TFile) {
+        this.app.workspace.openLinkText(child.path, '', true)
       }
 
       break
