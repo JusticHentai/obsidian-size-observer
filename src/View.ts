@@ -34,8 +34,8 @@ export default class View extends ItemView {
     this.updateView()
   }
 
-  clickCb(e: any) {
-    const element = e?.target || document.createElement('div')
+  clickCb(e: MouseEvent) {
+    const element = (e?.target as HTMLElement) || document.createElement('div')
 
     const attributeRes = findParent(element, {
       path: '',
@@ -107,7 +107,9 @@ export default class View extends ItemView {
   }
 
   updateView() {
-    this.contentEl.innerHTML = ''
+    while (this.contentEl.firstChild) {
+      this.contentEl.removeChild(this.containerEl.firstChild as HTMLElement)
+    }
 
     const newElement = render(base(this.current))
 
