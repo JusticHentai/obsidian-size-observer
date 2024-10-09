@@ -27,7 +27,7 @@ export default class SizeObserver extends Plugin {
 
     this.registerView(VIEW_TYPE, (leaf: WorkspaceLeaf) => new View(leaf))
 
-    this.addSettingTab(new SampleSettingTab(this.app, this))
+    this.addSettingTab(new SizeObserverSettingTab(this.app, this))
 
     this.addCommand({
       id: OPEN_VIEW_COMMAND.id,
@@ -43,7 +43,7 @@ export default class SizeObserver extends Plugin {
   onunload() {}
 }
 
-class SampleSettingTab extends PluginSettingTab {
+class SizeObserverSettingTab extends PluginSettingTab {
   plugin: SizeObserver
 
   constructor(app: App, plugin: SizeObserver) {
