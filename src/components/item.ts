@@ -1,4 +1,5 @@
 import { Component, DataItem } from '../types'
+import randomStyle from '../utils/randomStyle'
 
 const item = (data: DataItem): Component => {
   const { path } = data
@@ -8,20 +9,12 @@ const item = (data: DataItem): Component => {
     type: 'div',
     class: 'item',
     path: path,
+    style: randomStyle(),
     children: [
       {
         type: 'div',
         class: 'tree-item-inner nav-file-title-content path',
-        text: displayPath,
-      },
-      {
-        type: 'div',
-        class: 'gap',
-      },
-      {
-        type: 'div',
-        class: 'tree-item-inner nav-file-title-content percent',
-        text: `${data.percent}%`,
+        text: `${displayPath} | ${data.percent}%`,
       },
     ],
   }

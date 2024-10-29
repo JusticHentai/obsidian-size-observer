@@ -14,4 +14,5 @@ export interface Component {
   text?: string
   children?: Component[]
   path?: string
+  style?: string
 }

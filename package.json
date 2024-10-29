@@ -1,7 +1,7 @@
 {
   "name": "obsidian-sample-plugin",
   "version": "1.0.0",
-  "description": "Show the size of files then you can make superior easy",
+  "description": "Show the size of files",
   "keywords": [],
   "license": "MIT",
   "author": "",

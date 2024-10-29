@@ -108,7 +108,7 @@ export default class View extends ItemView {
 
   updateView() {
     while (this.contentEl.firstChild) {
-      this.contentEl.removeChild(this.containerEl.firstChild as HTMLElement)
+      this.contentEl.removeChild(this.contentEl.firstChild as HTMLElement)
     }
 
     const newElement = render(base(this.current))

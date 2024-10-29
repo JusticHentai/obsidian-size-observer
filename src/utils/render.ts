@@ -2,7 +2,7 @@ import { setIcon } from 'obsidian'
 import { Component } from '../types'
 
 const render = (component: Component): HTMLElement => {
-  const { type, class: cls, text, children, path } = component
+  const { type, class: cls, text, children, path, style } = component
 
   const div = document.createElement(type)
 
@@ -24,6 +24,10 @@ const render = (component: Component): HTMLElement => {
 
   if (path) {
     div.setAttribute('path', path)
+  }
+
+  if (style) {
+    div.setAttribute('style', style)
   }
 
   if (!children?.length) {
