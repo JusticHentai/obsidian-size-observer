@@ -7,7 +7,7 @@ export const VIEW_TYPE = 'sizeObserver'
 export const CONTENT_ELEMENT = 'view-content'
 export const OPEN_VIEW_COMMAND = {
   id: 'open-view',
-  name: 'Open View',
+  name: 'Open view',
 }
 export const RIBBON_DESC = 'Open file observer view'
 export const DEFAULT_SETTINGS = {

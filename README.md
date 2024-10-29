@@ -6,4 +6,4 @@ Show the size of files
 
 ## How to open Size Observer View
 
-- Enter command `Size Observer: Open View` 
+- Enter command `Size Observer: Open view` 
